@@ -1,15 +1,14 @@
-// File: controllers/microsoftAuthController.js
 const axios = require('axios');
 require('dotenv').config();
 
 const handleMicrosoftCallback = async (req, res) => {
   const { code } = req.query;
   if (!code) {
-    return res.status(400).json({ error: 'Authorization code is required.' });
+    // Redirect with an error query parameter
+    return res.redirect('http://localhost:5173?error=Authorization code is required.');
   }
 
   try {
-    // Exchange the authorization code for an access token
     const tokenResponse = await axios.post(`https://login.microsoftonline.com/consumers/oauth2/v2.0/token`, new URLSearchParams({
       client_id: process.env.MICROSOFT_CLIENT_ID,
       scope: 'User.Read',
@@ -23,13 +22,16 @@ const handleMicrosoftCallback = async (req, res) => {
       },
     });
 
-    // TODO: Handle the Microsoft account information, possibly by looking up or creating a user in your database
 
-    // Respond with a simplified JSON object (or redirect the user as needed)
-    res.json({ success: true, message: "Microsoft authentication successful", data: tokenResponse.data });
+    // Set the JWT as a cookie
+    res.cookie('microsoftToken', tokenResponse.data.access_token, { httpOnly: true,  path: '/' });
+
+    // Redirect to your frontend application with a success flag or similar
+    res.redirect('http://localhost:5173?login=success');
   } catch (error) {
     console.error('Error during Microsoft auth callback:', error.response ? error.response.data : error.message);
-    res.status(500).json({ error: 'Error during Microsoft authentication' });
+    // Redirect with an error query parameter
+    res.redirect(`http://localhost:5173?error=Error during Microsoft authentication`);
   }
 };
 
