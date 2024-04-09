@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser')
 const microsoftAuthRoutes = require('./routes/microsoftAuthRoutes');
 const calendarRoutes = require('./routes/calendarRoutes');
 
+
 const app = express();
 
 // Place this near the top of your app.js or server.js, right after initializing your Express app

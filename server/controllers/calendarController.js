@@ -1,23 +1,33 @@
 // controllers/calendarController.js
 const axios = require('axios');
 const FreeDateRange = require('../models/FreeDateRange');
+const jwt = require('jsonwebtoken');
 
 
 const getCalendarEvents = async (req, res) => {
     const { startDateTime, endDateTime } = req.query;
     const token = req.cookies['microsoftToken']; // Ensure the token is being correctly set in your cookies
+    const userToken = req.cookies['token'];
 
     if (!token) {
-        return res.status(401).json({ error: 'No authentication token found' });
+        return res.status(401).json({ error: 'No microsoft authentication token found' });
+    }
+
+    if (!userToken) {
+        return res.status(401).json({ error: 'No user authentication token found' });
     }
 
     try {
+        const decoded = jwt.verify(userToken, process.env.JWT_SECRET); 
+
         const graphResponse = await axios.get(`https://graph.microsoft.com/v1.0/me/calendarview?startdatetime=${startDateTime}&enddatetime=${endDateTime}&$select=subject,start,end`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
         });
+
+        
 
         const events = graphResponse.data.value.map(event => ({
             startDate: event.start.dateTime,
@@ -26,9 +36,21 @@ const getCalendarEvents = async (req, res) => {
 
         // Calculate free date ranges
         const freeDateRanges = calculateFreeDateRanges(events, startDateTime, endDateTime);
+        
+        //Store them in the database
+        // Find existing document for the user or create a new one
+        const freeDateRangeDoc = await FreeDateRange.findOneAndUpdate(
+            { userId: decoded.id }, // Query condition
+            { 
+                $push: { dateRanges: { $each: freeDateRanges } } // Push all calculated date ranges
+            },
+            { new: true, upsert: true } // Options: return new doc and create if not exists
+        );
+
 
         // Return only the free date ranges
         res.json({ freeDateRanges });
+
     } catch (error) {
         console.error('Error contacting Microsoft Graph API:', error.response ? error.response.data : error.message);
         res.status(500).json({ message: "Failed to retrieve calendar events", details: error.response ? error.response.data : error.message });
