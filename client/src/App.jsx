@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import Register from './pages/Register'
 import Login from './pages/Login'
+import Flights from './pages/Flights';
 import axios from 'axios'
 import {Toaster} from 'react-hot-toast'
 import { UserContextProvider } from '../context/userContext'
@@ -20,6 +21,7 @@ function App() {
       <Route path= '/' element={<Home />} />
       <Route path= '/register' element={<Register />} />
       <Route path= '/login' element={<Login />} />
+      <Route path='/flights' element={<Flights />} />
     </Routes>
     </UserContextProvider>
   )

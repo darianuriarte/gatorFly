@@ -5,6 +5,7 @@ const {mongoose} = require ('mongoose')
 const cookieParser = require('cookie-parser')
 const microsoftAuthRoutes = require('./routes/microsoftAuthRoutes');
 const calendarRoutes = require('./routes/calendarRoutes');
+const flightsRoutes = require('./routes/flightsRoutes');
 
 
 const app = express();
@@ -31,6 +32,7 @@ app.use(express.urlencoded({extended: false}))
 // Use the Microsoft auth routes
 app.use(microsoftAuthRoutes);
 app.use(calendarRoutes);
+app.use(flightsRoutes);
 
 app.use('/', require('./routes/authRoutes'))
 

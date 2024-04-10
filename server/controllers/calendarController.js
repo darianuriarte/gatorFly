@@ -18,7 +18,7 @@ const getCalendarEvents = async (req, res) => {
     }
 
     try {
-        const decoded = jwt.verify(userToken, process.env.JWT_SECRET); 
+        const decoded = jwt.verify(userToken, process.env.JWT_SECRET);
 
         const graphResponse = await axios.get(`https://graph.microsoft.com/v1.0/me/calendarview?startdatetime=${startDateTime}&enddatetime=${endDateTime}&$select=subject,start,end`, {
             headers: {
@@ -26,8 +26,6 @@ const getCalendarEvents = async (req, res) => {
                 'Content-Type': 'application/json',
             },
         });
-
-        
 
         const events = graphResponse.data.value.map(event => ({
             startDate: event.start.dateTime,
@@ -37,16 +35,13 @@ const getCalendarEvents = async (req, res) => {
         // Calculate free date ranges
         const freeDateRanges = calculateFreeDateRanges(events, startDateTime, endDateTime);
         
-        //Store them in the database
-        // Find existing document for the user or create a new one
-        const freeDateRangeDoc = await FreeDateRange.findOneAndUpdate(
+        // Store them in the database
+        // Replace existing document for the user or create a new one
+        const freeDateRangeDoc = await FreeDateRange.findOneAndReplace(
             { userId: decoded.id }, // Query condition
-            { 
-                $push: { dateRanges: { $each: freeDateRanges } } // Push all calculated date ranges
-            },
-            { new: true, upsert: true } // Options: return new doc and create if not exists
+            { userId: decoded.id, dateRanges: freeDateRanges }, // New document
+            { upsert: true, new: true } // Options: create if not exists and return new doc
         );
-
 
         // Return only the free date ranges
         res.json({ freeDateRanges });
