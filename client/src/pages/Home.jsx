@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
-  
-  const clientId = import.meta.env.VITE_AZURE_CLIENT_ID; 
-  const redirectUri = encodeURIComponent(import.meta.env.VITE_REDIRECT_URI); 
+  const clientId = import.meta.env.VITE_AZURE_CLIENT_ID;
+  const redirectUri = encodeURIComponent(import.meta.env.VITE_REDIRECT_URI);
   const scope = encodeURIComponent('user.read Calendars.Read');
   const responseType = 'code';
   const responseMode = 'query';
@@ -17,7 +17,9 @@ export default function Home() {
   const [endDate, setEndDate] = useState('');
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [events, setEvents] = useState([]);
+  const [freeDateRanges, setFreeDateRanges] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
@@ -35,16 +37,19 @@ export default function Home() {
     setIsLoading(true);
     try {
       const response = await fetch(`http://localhost:8000/getDates?startDateTime=${startDate}T00:00:00.000Z&endDateTime=${endDate}T23:59:59.999Z`, {
-  credentials: 'include', // This is correct for sending cookies
-});
-
+        credentials: 'include',
+      });
       const data = await response.json();
-      setEvents(data); // Assuming the response is the array of events
+      setFreeDateRanges(data.freeDateRanges);
     } catch (error) {
-      console.error('Error fetching calendar view:', error);
-      setEvents([]);
+      console.error('Error fetching free date ranges:', error);
+      setFreeDateRanges([]);
     }
     setIsLoading(false);
+  };
+
+  const handleFindFlights = () => {
+    navigate('/flights', { state: { fromDestination, toDestination, startDate, endDate } });
   };
 
   return (
@@ -53,42 +58,57 @@ export default function Home() {
       {loginSuccess ? (
         <>
           <p>Microsoft Account Successfully Synchronized.</p>
-          <label htmlFor="from">From:</label><br/>
+          <label htmlFor="from">From:</label><br />
           <input
             id="from"
             value={fromDestination}
             onChange={(e) => setFromDestination(e.target.value)}
             placeholder="From"
-          /><br/>
-          <label htmlFor="to">To:</label><br/>
+          /><br />
+          <label htmlFor="to">To:</label><br />
           <input
             id="to"
             value={toDestination}
             onChange={(e) => setToDestination(e.target.value)}
             placeholder="To"
-          /><br/>
-          <label>Choose a Date Range for your flight:</label><br/>
+          /><br />
+          <label>Choose a Date Range for your flight:</label><br />
           <input
             type="date"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
             placeholder="Start Date"
-          /> to 
+          /> to
           <input
             type="date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
             placeholder="End Date"
-          /><br/>
+          /><br />
           <button onClick={handleSearch} disabled={isLoading}>
-            {isLoading ? 'Searching...' : 'Search'}
+            {isLoading ? 'Searching...' : 'Search Available Dates'}
           </button>
-          {events.length > 0 && (
-            <ul>
-              {events.map(event => (
-                <li key={event.id}>{event.subject} - {new Date(event.start.dateTime).toLocaleString()}</li>
-              ))}
-            </ul>
+          {freeDateRanges.length > 0 && (
+            <>
+              <h2>Available Dates:</h2>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {freeDateRanges.map((range, index) => (
+                    <tr key={index}>
+                      <td>{new Date(range.startDate).toLocaleDateString()}</td>
+                      <td>{new Date(range.endDate).toLocaleDateString()}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <button onClick={handleFindFlights}>Find Flights</button>
+            </>
           )}
         </>
       ) : (
