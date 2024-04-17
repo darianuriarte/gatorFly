@@ -1,0 +1,33 @@
+.custom-input-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .custom-input {
+    width: 300px; /* Adjust width as needed */
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    outline: none;
+    margin-bottom: 30px;
+    background-color: transparent !important;
+
+  }
+  
+  .custom-label {
+    position: absolute;
+    top: -10px; /* Adjust vertical position as needed */
+    left: 10px; /* Adjust horizontal position as needed */
+    background-color: white; /* Ensure label is visible */
+    padding: 0 5px;
+  }
+
+  .custom-input:focus {
+    /* Style to apply when input is focused */
+    border-color: #007bff; /* Example of changing border color on focus */
+  }
+
+  .custom-input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset; /* Override autofill background color */
+  }
+  
