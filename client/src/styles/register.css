@@ -2,15 +2,16 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 .register-container {
     display: grid;
     grid-template-columns: 1fr 1fr; /* Divide into two columns */
     gap: 20px; /* Add some space between columns */
-    padding: 20px; /* Add padding for better readability */
-    width: 100vw; /* 100% of the viewport width */
+    width: 100vw !important; 
     height: 100vh;
+    margin: 0px !important;
 }
 
 .left-half {
@@ -24,7 +25,8 @@ html, body {
 .right-half {
     background-image: url('../planepic.png');
     background-size: cover !important;
-    height: 100%;
+    margin-right:0px !important;
+    padding-right:0px !important;
 }
 
 .custom-input-container {
@@ -32,13 +34,14 @@ html, body {
 }
 
 .custom-input {
-    width: 400px;
+    width: 300px;
     padding: 10px;
     border: 2px solid #ccc;
     border-radius: 10px;
     outline: none;
     margin-bottom: 30px;
     background-color: transparent !important;
+    
 }
 
 .custom-label {

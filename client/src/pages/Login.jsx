@@ -2,6 +2,7 @@ import { useState } from "react"
 import axios from 'axios'
 import toast from "react-hot-toast"
 import { useNavigate } from "react-router-dom"
+import '../styles/register.css'
 
 export default function Login() {
 
@@ -34,13 +35,23 @@ const loginUser = async (e) => {
     
   return (
     <div>
-      <form onSubmit = {loginUser}>
-      <label>Email</label>
-            <input type='email' placeholder ='Please enter your email' value = {data.email} onChange={(e) => setData({...data, email: e.target.value})}/>
-            <label>Password</label>
-            <input type='password' placeholder ='Please enter a password' value = {data.password} onChange={(e) => setData({...data, password: e.target.value})}/>
-            <button type= 'submit' >Login</button>
-      </form>
+       <div className="register-container">
+          <div className="left-half">
+            <h1> Welcome back!</h1>
+            <form onSubmit = {loginUser}>
+            <div className="custom-input-container">
+              <label className="custom-label">Email</label>
+              <input className="custom-input" type='email' placeholder ='Please enter your email' value = {data.email} onChange={(e) => setData({...data, email: e.target.value})}/>
+            </div>  
+            <div className="custom-input-container">
+              <label className="custom-label">Password</label>
+              <input className="custom-input" type='password' placeholder ='Please enter a password' value = {data.password} onChange={(e) => setData({...data, password: e.target.value})}/>
+            </div>  
+                  <button type= 'submit' >Login</button>
+            </form>
+          </div>
+          <div className="right-half"></div>
+        </div>
     </div>
   )
 }
