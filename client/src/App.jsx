@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Flights from './pages/Flights';
+import Landing from './pages/Landing';
 import axios from 'axios'
 import {Toaster} from 'react-hot-toast'
 import { UserContextProvider } from '../context/userContext'
@@ -22,6 +23,7 @@ function App() {
       <Route path= '/register' element={<Register />} />
       <Route path= '/login' element={<Login />} />
       <Route path='/flights' element={<Flights />} />
+      <Route path='/landing' element={<Landing />} />
     </Routes>
     </UserContextProvider>
   )
