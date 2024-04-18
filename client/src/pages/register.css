@@ -1,0 +1,70 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.register-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Divide into two columns */
+    gap: 20px; /* Add some space between columns */
+    padding: 20px; /* Add padding for better readability */
+    width: 100vw; /* 100% of the viewport width */
+    height: 100vh;
+}
+
+.left-half {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.right-half {
+    background-image: url('../planepic.png');
+    background-size: cover !important;
+    height: 100%;
+}
+
+.custom-input-container {
+    position: relative;
+}
+
+.custom-input {
+    width: 400px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    outline: none;
+    margin-bottom: 30px;
+    background-color: transparent !important;
+}
+
+.custom-label {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background-color: white;
+    padding: 0 5px;
+}
+
+.custom-input:focus {
+    border-color: #253D68;
+}
+
+.custom-input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+button {
+    width: 325px;
+    background-color: #253D68 !important;
+    color: white;
+    border-radius: 10px !important;
+}
+
+h1 {
+    font-size: xx-large !important;
+    font-weight: 500;
+}
