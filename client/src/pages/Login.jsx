@@ -12,26 +12,26 @@ export default function Login() {
         password: '',
     })
   
-const loginUser = async (e) => {
-    e.preventDefault()
-    const {email, password} = data
-    try{
-      const{data} = await axios.post('/login', {
-        email,
-        password
-      })
+    const loginUser = async (e) => {
+        e.preventDefault()
+        const {email, password} = data
+        try{
+          const{data} = await axios.post('/login', {
+            email,
+            password
+          })
 
-      if (data.error){
-        toast.error(data.error)
-      } else{
-        setData({});
-        navigate('/')
-      }
-    }catch (error){
-      
+          if (data.error){
+            toast.error(data.error)
+          } else{
+            setData({});
+            navigate('/home')
+          }
+        }catch (error){
+          
+        }
+
     }
-
-}
     
   return (
     <div>
