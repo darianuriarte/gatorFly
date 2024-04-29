@@ -16,10 +16,12 @@ export default function Landing() {
 
     return (
         <div className="landing-container">
+
             <h1 className="landing-heading">GatorFly</h1>
             <p className="landing-p">Traveling is easier than ever</p>
             <button className="login-button" onClick={handleLoginClick}>Login</button>
             <button className="sign-button" onClick={handleSignUpClick}>Sign Up</button>
+
         </div>
     );
 }

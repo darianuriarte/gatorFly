@@ -23,7 +23,7 @@ html, body {
 }
 
 .right-half {
-    background-image: url('../planepic.png');
+    background-image: url('../croppedplanepic.png');
     background-size: cover !important;
     margin-right:0px !important;
     padding-right:0px !important;
@@ -67,7 +67,9 @@ button {
     border-radius: 10px !important;
 }
 
+
 h1 {
     font-size: xx-large;
     font-weight: 500;
 }
+

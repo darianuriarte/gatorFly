@@ -27,14 +27,12 @@ a:hover {
 body, html {
   margin: 0;
   padding: 0;
+  display: block;
 }
 
 body {
   margin: 0;
   padding: 0;
-  
-  place-items: start;
- 
 }
 
 h1 {
