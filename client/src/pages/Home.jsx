@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/register.css'
+import '../styles/home.css'
 export default function Home() {
   const clientId = import.meta.env.VITE_AZURE_CLIENT_ID;
   const redirectUri = encodeURIComponent(import.meta.env.VITE_REDIRECT_URI);
@@ -53,8 +53,10 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <h1>Home</h1>
+    <div className="home-container">
+      <h1 className="home-heading">Welcome,</h1>
+      <p className="home-p">Please sync your Microsoft account</p>
+      <div className="microsoft">hi</div>
       {loginSuccess ? (
         <>
           <p>Microsoft Account Successfully Synchronized.</p>

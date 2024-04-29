@@ -24,7 +24,7 @@ const handleMicrosoftCallback = async (req, res) => {
 
 
     // Set the JWT as a cookie
-    res.cookie('microsoftToken', tokenResponse.data.access_token, { httpOnly: true,  path: '/' });
+    res.cookie('microsoftToken', tokenResponse.data.access_token, { httpOnly: true,  path: '/home' });
 
     // Redirect to your frontend application with a success flag or similar
     res.redirect('http://localhost:5173?login=success');
