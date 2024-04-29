@@ -1,0 +1,48 @@
+.home-container {
+    margin: 0;
+    padding: 2%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url('../planepic.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    color: white;
+}
+
+.home-heading {
+    font-family: 'Judson, serif';
+    font-size: 4vw;
+    position: absolute;
+    top: 7%;
+    left: 5%;
+}
+
+.home-p {
+    font-family: 'Inter, sans-serif';
+    font-size: 1.5vw;
+    position: absolute;
+    top: 17%;
+    left: 5%;
+}
+
+.microsoft {
+    position: absolute;
+    background-color: white;
+    opacity: 0.5;
+    height: 45%;
+    width: 42%;
+    top: 35%;
+    left: 27%;
+    border-radius: 10px;
+}
+
+.button {
+    
+}

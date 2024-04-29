@@ -55,7 +55,6 @@ return (
             </form>
         </div>
         <div className="right-half"></div>
-
     </div>
-  )
+)
 }
