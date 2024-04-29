@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import '../styles/register.css'
 export default function Home() {
   const clientId = import.meta.env.VITE_AZURE_CLIENT_ID;
   const redirectUri = encodeURIComponent(import.meta.env.VITE_REDIRECT_URI);
