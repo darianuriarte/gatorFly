@@ -54,9 +54,6 @@ export default function Home() {
 
   return (
     <div className="home-container">
-      <h1 className="home-heading">Welcome,</h1>
-      <p className="home-p">Please sync your Microsoft account</p>
-      <div className="microsoft">hi</div>
       {loginSuccess ? (
         <>
           <p>Microsoft Account Successfully Synchronized.</p>
@@ -114,7 +111,12 @@ export default function Home() {
           )}
         </>
       ) : (
-        <button onClick={handleLogin}>Login to your Microsoft Account to sync your calendar</button>
+        <div>
+          <h1 className="home-heading">Welcome,</h1>
+          <p className="home-p">Please sync your Microsoft account</p>
+          <div className="microsoft">hi</div>
+          <button onClick={handleLogin}>Login to your Microsoft Account to sync your calendar</button>
+        </div>
       )}
     </div>
   );
