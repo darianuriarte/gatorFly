@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/home.css'
+import logo from '../microsoft.png';
 export default function Home() {
   const clientId = import.meta.env.VITE_AZURE_CLIENT_ID;
   const redirectUri = encodeURIComponent(import.meta.env.VITE_REDIRECT_URI);
@@ -137,9 +138,13 @@ export default function Home() {
           <div className="microsoft">
 
           <h1 className="home-heading">Welcome,</h1>
+          <img className="image-h" src={logo} alt="Logo" />
+          <div className="microsoft">
+          </div>
           <p className="home-p">Please sync your Microsoft account</p>
           <button className='microsoftButton' onClick={handleLogin}>Login to your Microsoft Account to sync your calendar</button>
           </div>
+          <button className="button-h" onClick={handleLogin}>Sync Account</button>
         </div>
       )}
     </div>

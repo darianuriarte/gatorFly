@@ -1,12 +1,15 @@
-import {Link} from 'react-router-dom'
-import '../styles/navbar.css'
-export default function Navbar(){
+import { Link } from 'react-router-dom';
+import '../styles/navbar.css';
+
+export default function Navbar() {
     return (
         <nav>
-            <Link to= '/home'>Home</Link>
-            <Link to= '/register'>Register</Link>
-            <Link to= '/login'>Login</Link>
+            <Link className="gatorfly" to="/">Gatorfly</Link>
+            <div className="right-links">
+                <Link to="/register">Register</Link>
+                <Link to="/login">Login</Link>
+            </div>
         </nav>
-        
-    )
+    );
 }
+
