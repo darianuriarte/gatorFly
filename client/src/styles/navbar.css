@@ -1,22 +1,36 @@
 /* navbar.css */
 
 body, nav {
-    margin: 0;
-    padding: 0;
-  }
+  margin: 0;
+  padding: 0;
+}
 
 nav {
-    width: 100%;
-    background-color: #253D68;
-    padding: 20px 0; /* Adjust padding as needed */
-    text-align: right; /* Center the links horizontally */
-    
-  }
-  
-  nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0 20px; /* Adjust spacing between links */
-    margin-right: 50px;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 97;
+  background-color: #253D68;
+  padding: 20px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+.gatorfly {
+  font-size: 2vw;
+  font-weight: bold;
+}
+
+.right-links {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+}
+
+
+
   

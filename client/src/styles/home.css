@@ -43,6 +43,8 @@
     border-radius: 10px;
 }
 
-.button {
-    
+.button-h {
+    position: absolute;
+    top: 52%;
+    left: 37%;
 }

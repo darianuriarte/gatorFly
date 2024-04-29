@@ -115,7 +115,7 @@ export default function Home() {
           <h1 className="home-heading">Welcome,</h1>
           <p className="home-p">Please sync your Microsoft account</p>
           <div className="microsoft">hi</div>
-          <button onClick={handleLogin}>Login to your Microsoft Account to sync your calendar</button>
+          <button className="button-h" onClick={handleLogin}>Sync Account</button>
         </div>
       )}
     </div>
