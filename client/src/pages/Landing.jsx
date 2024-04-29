@@ -5,7 +5,7 @@ export default function Landing() {
     return (
         <div className="landing-container">
             <div>
-                <p>hi</p>
+                <h1 style={{color: 'white', marginLeft: '40px'}} >Welcome to GatorFly</h1>
             </div>
         </div>
     );

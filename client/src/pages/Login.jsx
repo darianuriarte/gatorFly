@@ -37,7 +37,7 @@ const loginUser = async (e) => {
     <div>
        <div className="register-container">
           <div className="left-half">
-            <h1> Welcome back!</h1>
+            <h1 style={{ color: '#253D68', fontSize: 'xx-large' }}> Welcome back!</h1>
             <form onSubmit = {loginUser}>
             <div className="custom-input-container">
               <label className="custom-label">Email</label>

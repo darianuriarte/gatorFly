@@ -1,10 +1,11 @@
 .landing-container {
     margin: 0;
     display: flex;
-    place-items: center;
+    place-items: start;
     min-width: 100vw;
     min-height: 100vh;
-    background-image: url('../planepic.png'); /* Corrected URL */
+    background-image: url('../planepic.jpg'); /* Corrected URL */
     background-size: cover;
     background-position: center;
 }
+
