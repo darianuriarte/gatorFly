@@ -1,11 +1,50 @@
 .landing-container {
     margin: 0;
-    display: flex;
-    place-items: start;
-    min-width: 100vw;
-    min-height: 100vh;
-    background-image: url('../planepic.jpg'); /* Corrected URL */
+
+    padding: 2%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url('../plane.jpeg');
+
     background-size: cover;
     background-position: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    color: white;
 }
+
+
+.landing-heading {
+    font-family: 'Judson, serif';
+    font-size: 5vw;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+}
+
+.landing-p {
+    font-family: 'Inter, sans-serif';
+    font-size: 2vw;
+    position: absolute;
+    top: 18%;
+    left: 5%;
+}
+
+.login-button {
+    position: absolute;
+    top: 40%;
+    left: 5%;
+}
+
+.sign-button {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+}
+
 

@@ -2,7 +2,7 @@ import {useState } from 'react'
 import axios from 'axios'
 import {toast} from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
-import '../styles/register.css'
+import './register.css'
 
 export default function Register() {
     const navigate = useNavigate()
@@ -33,6 +33,7 @@ const registerUser =  async (e) => {
     }
 }
 
+
 return (
     <div className="register-container">
         <div className="left-half">
@@ -54,6 +55,7 @@ return (
             </form>
         </div>
         <div className="right-half"></div>
+
     </div>
-)
+  )
 }

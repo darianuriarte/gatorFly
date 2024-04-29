@@ -19,11 +19,11 @@ function App() {
     <Navbar />
     <Toaster position='bottom-right' toastOptions={{duration: 2000}} />
     <Routes>
-      <Route path= '/' element={<Home />} />
+      <Route path= '/' element={<Landing />} />
       <Route path= '/register' element={<Register />} />
       <Route path= '/login' element={<Login />} />
       <Route path='/flights' element={<Flights />} />
-      <Route path='/landing' element={<Landing />} />
+      <Route path='/home' element={<Home />} />
     </Routes>
     </UserContextProvider>
   )
