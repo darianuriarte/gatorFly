@@ -27,7 +27,7 @@ const handleMicrosoftCallback = async (req, res) => {
     res.cookie('microsoftToken', tokenResponse.data.access_token, { httpOnly: true,  path: '/home' });
 
     // Redirect to your frontend application with a success flag or similar
-    res.redirect('http://localhost:5173?login=success');
+    res.redirect('http://localhost:5173/home?login=success');
   } catch (error) {
     console.error('Error during Microsoft auth callback:', error.response ? error.response.data : error.message);
     // Redirect with an error query parameter
