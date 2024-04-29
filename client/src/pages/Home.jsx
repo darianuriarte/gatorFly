@@ -56,37 +56,58 @@ export default function Home() {
     <div className="home-container">
       {loginSuccess ? (
         <>
-          <p>Microsoft Account Successfully Synchronized.</p>
-          <label htmlFor="from">From:</label><br />
-          <input
-            id="from"
-            value={fromDestination}
-            onChange={(e) => setFromDestination(e.target.value)}
-            placeholder="From"
-          /><br />
-          <label htmlFor="to">To:</label><br />
-          <input
-            id="to"
-            value={toDestination}
-            onChange={(e) => setToDestination(e.target.value)}
-            placeholder="To"
-          /><br />
-          <label>Choose a Date Range for your flight:</label><br />
-          <input
-            type="date"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-            placeholder="Start Date"
-          /> to
-          <input
-            type="date"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-            placeholder="End Date"
-          /><br />
-          <button onClick={handleSearch} disabled={isLoading}>
-            {isLoading ? 'Searching...' : 'Search Available Dates'}
-          </button>
+          <div className='searchWelcome'>
+            <h1 >Welcome, Placeholder</h1>
+            <p>Microsoft Account Successfully Synchronized.</p>
+          </div>
+
+          <div className='searchBox'>
+
+            <div className='searchParams'>
+
+              
+                    <label className='searchLabel' htmlFor="from">From:</label><br />
+                    <input
+                    id="from"
+                    value={fromDestination}
+                    onChange={(e) => setFromDestination(e.target.value)}
+                      placeholder="Ex: MIA or miami"
+                    />
+                  <div className='destinationBoxes'>
+                    <label className='searchLabel' htmlFor="to">To:</label>
+                    <input
+                      id="to"
+                      value={toDestination}
+                      onChange={(e) => setToDestination(e.target.value)}
+                      placeholder="Ex: JFK or New York"
+                    />
+                  
+                </div>
+
+                <div className='searchDates'>
+                  <label>Choose a Date Range for your flight:</label>
+                  <input
+                    type="date"
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                    placeholder="Start Date"
+                  />
+                  <input
+                    type="date"
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
+                    placeholder="End Date"
+                  />
+                </div>
+                
+              </div>
+          
+            <button className='searchButton' onClick={handleSearch} disabled={isLoading}>
+              {isLoading ? 'Searching...' : 'Search Available Dates'}
+            </button>
+
+          </div>
+          
           {freeDateRanges.length > 0 && (
             <>
               <h2>Available Dates:</h2>
@@ -112,10 +133,13 @@ export default function Home() {
         </>
       ) : (
         <div>
+          
+          <div className="microsoft">
+
           <h1 className="home-heading">Welcome,</h1>
           <p className="home-p">Please sync your Microsoft account</p>
-          <div className="microsoft">hi</div>
-          <button onClick={handleLogin}>Login to your Microsoft Account to sync your calendar</button>
+          <button className='microsoftButton' onClick={handleLogin}>Login to your Microsoft Account to sync your calendar</button>
+          </div>
         </div>
       )}
     </div>
