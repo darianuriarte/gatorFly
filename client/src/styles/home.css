@@ -45,6 +45,14 @@
 
 .button-h {
     position: absolute;
-    top: 52%;
+    top: 70%;
+    left: 38%;
+}
+
+.image-h {
+    position: absolute;
+    top: 42%;
     left: 37%;
+    width: 23%;
+    height: auto;
 }
