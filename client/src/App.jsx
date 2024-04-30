@@ -6,7 +6,7 @@ import Calendar from './pages/Calendar';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Flights from './pages/Flights';
-import PrivateRoutes from './componengts/PrivateRoutes';
+import PrivateRoutes from './components/PrivateRoutes';
 
 import axios from 'axios';
 import { Toaster } from 'react-hot-toast';
