@@ -68,7 +68,7 @@ function calculateFreeDateRanges(events, startDateTime, endDateTime) {
     events.forEach(event => {
         if (currentStartDate < event.startDate) {
             let adjustedEndDate = new Date(event.startDate);
-            adjustedEndDate.setDate(adjustedEndDate.getDate() - 1); // Make end date inclusive of free range
+            adjustedEndDate.setDate(adjustedEndDate.getDate()); // Make end date inclusive of free range
             if (adjustedEndDate >= currentStartDate) { // Include range only if it starts within the input range
                 freeDateRanges.push({
                     startDate: currentStartDate.toISOString().split('T')[0],
@@ -76,7 +76,7 @@ function calculateFreeDateRanges(events, startDateTime, endDateTime) {
                 });
             }
         }
-        currentStartDate = new Date(event.endDate.getTime() + (24 * 60 * 60 * 1000)); // Move to the day after event ends
+        currentStartDate = new Date(event.endDate.getTime() + (2* 24 * 60 * 60 * 1000)); // Move to the day after event ends
     });
 
     // Check for a final range after the last event
@@ -95,7 +95,7 @@ function calculateFreeDateRanges(events, startDateTime, endDateTime) {
     })).filter(range => {
         const start = new Date(range.startDate);
         const end = new Date(range.endDate);
-        const diffDays = (end - start) / (1000 * 60 * 60 * 24);
+        const diffDays = (end - start) / (1000 * 60 * 60 * 24) + 1;
         return diffDays >= 3;
     });
 

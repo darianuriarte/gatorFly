@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { FaPlane, FaHome } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import sadGator from '../assets/sadgator.png';
+import vacationImage from '../assets/vacationgator.png';
+import toast from 'react-hot-toast';
 
 export default function Flights() {
   const [freeDateRanges, setFreeDateRanges] = useState([]);
@@ -8,6 +13,7 @@ export default function Flights() {
   const [flightType, setFlightType] = useState('one-way');
   const [selectedDateRangeIndex, setSelectedDateRangeIndex] = useState(null);
   const [flights, setFlights] = useState([]);
+  const [searchClicked, setSearchClicked] = useState(false);
 
   useEffect(() => {
     const fetchFreeDateRanges = async () => {
@@ -23,10 +29,23 @@ export default function Flights() {
   }, []);
 
   const handleSearch = async () => {
-    if (selectedDateRangeIndex === null || !originCity || !destinationCity) {
-      alert('Please fill all fields');
+    if (selectedDateRangeIndex === null) {
+      toast.error('Please select a date range');
       return;
     }
+
+    if (!originCity || !destinationCity) {
+      toast.error('Please enter both origin and destination cities');
+      return;
+    }
+
+    if (originCity === destinationCity) {
+      toast.error('Origin and destination cities cannot be the same');
+      return;
+    }
+
+    setSearchClicked(true);
+    setFlights([]); // Clear previous search results
 
     const selectedDateRange = freeDateRanges[selectedDateRangeIndex];
 
@@ -49,7 +68,7 @@ export default function Flights() {
       setFlights(response.data);
     } catch (error) {
       console.error('Error fetching flights:', error);
-      alert('Failed to fetch flights');
+      toast.error('Failed to fetch flights');
     }
   };
 
@@ -63,86 +82,135 @@ export default function Flights() {
   };
 
   return (
-    <div>
-      <h1>Flights Search</h1>
-      <div>
-        <label>
-          Flight Type:
+    <div className="flights-container">
+      <div className="dates-container">
+        <h2>Available Dates:</h2>
+        {freeDateRanges.length > 0 ? (
+          <div className="date-boxes">
+            {freeDateRanges.map((range, index) => (
+              <div
+                key={index}
+                className={`date-card ${selectedDateRangeIndex === index ? 'selected' : ''}`}
+                onClick={() => setSelectedDateRangeIndex(index)}
+              >
+                <div className="date-section">
+                  <FaPlane className="date-icon" />
+                  <span className="date-label">Departure:</span>
+                  <span className="date-value">{new Date(range.startDate).toLocaleDateString()}</span>
+                </div>
+                <div className="date-section">
+                  <FaHome className="date-icon" />
+                  <span className="date-label">Return:</span>
+                  <span className="date-value">{new Date(range.endDate).toLocaleDateString()}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="no-dates-message">
+            <p>No available dates. Please select a different date range.</p>
+            <Link to="/calendar?login=success">Go to Calendar</Link>
+          </div>
+        )}
+      </div>
+
+      <div className="search-container">
+        <div className="search-bar">
           <select value={flightType} onChange={(e) => setFlightType(e.target.value)}>
             <option value="one-way">One-Way</option>
             <option value="round-trip">Round-Trip</option>
           </select>
-        </label>
-        <label>
-          Origin City:
-          <input type="text" value={originCity} onChange={(e) => setOriginCity(e.target.value)} />
-        </label>
-        <label>
-          Destination City:
-          <input type="text" value={destinationCity} onChange={(e) => setDestinationCity(e.target.value)} />
-        </label>
-        <button onClick={handleSearch}>Search</button>
-      </div>
-
-      <div>
-        <h2>Available Dates:</h2>
-        <ul>
-          {freeDateRanges.map((range, index) => (
-            <li
-              key={index}
-              style={{ backgroundColor: selectedDateRangeIndex === index ? 'lightgrey' : 'transparent' }}
-              onClick={() => setSelectedDateRangeIndex(index)}
-            >
-              {new Date(range.startDate).toLocaleDateString()} - {new Date(range.endDate).toLocaleDateString()}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {flights.length > 0 && (
-        <div>
-          <h2>Flight Results:</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Price</th>
-                <th>Origin</th>
-                <th>Destination</th>
-                <th>Departure</th>
-                <th>Arrival</th>
-                <th>Duration</th>
-                <th>Carrier</th>
-              </tr>
-            </thead>
-            <tbody>
-              {flights.map((flight, index) => (
-                <tr key={index}>
-                  <td>{flight.price}</td>
-                  {flightType === 'one-way' ? (
-                    <>
-                      <td>{flight.origin}</td>
-                      <td>{flight.destination}</td>
-                      <td>{new Date(flight.departure).toLocaleString()}</td>
-                      <td>{new Date(flight.arrival).toLocaleString()}</td>
-                      <td>{calculateDuration(flight.departure, flight.arrival)}</td>
-                      <td>{flight.carrier}</td>
-                    </>
-                  ) : (
-                    <>
-                      <td>{flight.outbound.origin}</td>
-                      <td>{flight.outbound.destination}</td>
-                      <td>{new Date(flight.outbound.departure).toLocaleString()}</td>
-                      <td>{new Date(flight.outbound.arrival).toLocaleString()}</td>
-                      <td>{calculateDuration(flight.outbound.departure, flight.outbound.arrival)}</td>
-                      <td>{flight.outbound.carrier}</td>
-                    </>
-                  )}
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <input
+            type="text"
+            placeholder="Origin City"
+            value={originCity}
+            onChange={(e) => setOriginCity(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Destination City"
+            value={destinationCity}
+            onChange={(e) => setDestinationCity(e.target.value)}
+          />
+          <button onClick={handleSearch}>Search</button>
         </div>
-      )}
+
+        <div className="flight-results">
+          {searchClicked && flights.length === 0 && (
+            <div className="loading-message">
+              <img src={vacationImage} alt="Vacation Gator" className="spinning" />
+            </div>
+          )}
+          {flights.length > 0 && (
+            <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Price</th>
+                  <th>Origin</th>
+                  <th>Destination</th>
+                  <th>Departure</th>
+                  <th>Arrival</th>
+                  <th>Duration</th>
+                  <th>Carrier</th>
+                </tr>
+              </thead>
+              <tbody>
+                {flights.map((flight, index) => (
+                  <React.Fragment key={index}>
+                    {flightType === 'one-way' ? (
+                      <tr>
+                        <td>{flight.price}</td>
+                        <td>{flight.origin}</td>
+                        <td>{flight.destination}</td>
+                        <td>{new Date(flight.departure).toLocaleString()}</td>
+                        <td>{new Date(flight.arrival).toLocaleString()}</td>
+                        <td>{calculateDuration(flight.departure, flight.arrival)}</td>
+                        <td>{flight.carrier}</td>
+                      </tr>
+                    ) : flight.outbound && flight.inbound ? (
+                      <>
+                        <tr>
+                          <td rowSpan={2}>{flight.price}</td>
+                          <td>{flight.outbound.origin}</td>
+                          <td>{flight.outbound.destination}</td>
+                          <td>{new Date(flight.outbound.departure).toLocaleString()}</td>
+                          <td>{new Date(flight.outbound.arrival).toLocaleString()}</td>
+                          <td>{calculateDuration(flight.outbound.departure, flight.outbound.arrival)}</td>
+                          <td>{flight.outbound.carrier}</td>
+                        </tr>
+                        <tr>
+                          <td>{flight.inbound.origin}</td>
+                          <td>{flight.inbound.destination}</td>
+                          <td>{new Date(flight.inbound.departure).toLocaleString()}</td>
+                          <td>{new Date(flight.inbound.arrival).toLocaleString()}</td>
+                          <td>{calculateDuration(flight.inbound.departure, flight.inbound.arrival)}</td>
+                          <td>{flight.inbound.carrier}</td>
+                        </tr>
+                      </>
+                    ) : null}
+                  </React.Fragment>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          )}
+          {!searchClicked && (
+  <div className="no-results-message">
+    {freeDateRanges.length === 0 ? (
+      <>
+        <img src={sadGator} alt="Sad Gator" />
+      </>
+    ) : (
+      <>
+        <img src={vacationImage} alt="Vacation Gator" />
+        <p>Please select a date range to start.</p>
+      </>
+    )}
+  </div>
+)}
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,7 +1,5 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  margin: 0;
   text-align: center;
 }
 
@@ -39,4 +37,703 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* Home page styles */
+.home-container {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.home-content {
+  position: absolute;
+  top: 7%;
+  left: 10%;
+  z-index: 1;
+  color: #fff;
+  text-align: left;
+}
+
+.home-title {
+  font-size: 4rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.home-subtitle {
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+
+.home-buttons {
+  display: flex;
+
+}
+
+.home-buttonRegister {
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #FA4616; /* Orange text */
+  background-color: transparent; /* Clear background */
+  border: 2px solid #FA4616; /* Orange border */
+  border-radius: 4px;
+  margin-right: 40px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  width: 120px;
+  height: 30px;
+  display: flex;
+  justify-content: center; /* Center text horizontally */
+  align-items: center; /* Center text vertically */
+  cursor: pointer; /* Changes the cursor to a pointer to indicate it's clickable */
+}
+
+.home-buttonLogin {
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #FA4616;
+  border: none;
+  border-radius: 4px;
+  margin-right: 40px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  width: 120px;
+  height: 30px;
+  display: flex;
+  justify-content: center; /* Center text horizontally */
+  align-items: center; /* Center text vertically */
+}
+
+.home-buttonRegister:hover {
+  background-color: #e53e0f; /* Darker orange on hover */
+  color: #fff; /* Change text color to white on hover for better visibility */
+}
+
+.home-buttonLogin:hover {
+  background-color: #e53e0f; /* Darker orange on hover */
+  color: #fff; /* Change text color to white on hover for better visibility */
+}
+
+.home-button:hover {
+  background-color: #e53e0f;
+}
+
+.home-image {
+  width: calc(100% + 10px); /* Expand width */
+  height: calc(100% + 10px); /* Expand height */
+  object-fit: cover;
+  filter: blur(3px);
+  position: relative;
+  left: -5px; /* Adjust position to center */
+  top: -5px;
+}
+
+/* Styles specific for the login page */
+.login-page .login-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 100vh;
+  background-color: #fff; /* Changed background color to white */
+}
+
+.login-page .login-content {
+  max-width: 400px;
+  margin-right: 9em;
+  margin-left: 10%;
+  text-align: left;
+}
+
+.login-page .login-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5em;
+  color: #333;
+}
+
+.login-page .login-content p {
+  font-size: 1.2rem;
+  margin-bottom: 4em;
+}
+
+.login-page .login-form {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: none; /* Removed box shadow */
+}
+
+.login-page .login-input {
+  width: 100%;
+  padding: 1em;
+  margin-bottom: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1rem; /* Added font size for input fields */
+  margin-bottom: 10%;
+}
+
+.login-page .login-button {
+  width: 100%;
+  padding: 1em;
+  border: none;
+  border-radius: 4px;
+  background-color: #FA4616;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-page .login-button:hover {
+  background-color: #e53e0f;
+}
+
+.login-page .login-footer {
+  text-align: center;
+  margin-top: 2em;
+}
+
+.login-page .login-footer a {
+  color: #FA4616;
+  text-decoration: none;
+}
+
+.login-page .login-footer a:hover {
+  text-decoration: underline;
+}
+
+.login-page .login-image {
+  width: 50%;
+  height: 100vh;
+  object-fit: cover;
+  margin-left: auto;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .login-page .login-container {
+    flex-direction: column;
+  }
+  
+  .login-page .login-image {
+    width: 100%;
+    height: auto;
+    order: -1;
+  }
+
+  .login-page .login-content {
+    margin-left: 0;
+    margin-right: 0;
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+/* Registration Page */
+
+/* Register.css */
+.register-page {
+  /* Add your styles for the register page container */
+}
+
+.register-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+.register-content {
+  max-width: 400px;
+  margin-right: 9em;
+  margin-left: 10%;
+  text-align: left;
+}
+
+.register-content h1 {
+  font-size: 2.0rem;
+  margin-bottom: 0.5em;
+  color: #333;
+}
+
+.register-content p {
+  font-size: 0.9rem;
+  margin-bottom: 4em;
+}
+
+.register-form {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.register-input {
+  width: 100%;
+  padding: 1em;
+  margin-bottom: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  margin-bottom: 5%;
+}
+
+.register-button {
+  width: 100%;
+  padding: 1em;
+  border: none;
+  border-radius: 4px;
+  background-color: #FA4616;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.register-button:hover {
+  background-color: #e53e0f;
+}
+
+.register-footer {
+  text-align: center;
+  margin-top: 2em;
+}
+
+.register-footer a {
+  color: #FA4616;
+  text-decoration: none;
+}
+
+.register-footer a:hover {
+  text-decoration: underline;
+}
+
+.register-image {
+  width: 50%;
+  height: 100vh;
+  object-fit: cover;
+  margin-left: auto;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .register-container {
+    flex-direction: column;
+  }
+  
+  .register-image {
+    width: 100%;
+    height: auto;
+    order: -1;
+  }
+
+  .register-content {
+    margin-left: 0;
+    margin-right: 0;
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+.calendar-container {
+  max-width: 100vw;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 62px;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  background-image: url('../assets/image.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+h1 {
+  margin-top: 70px;
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.sync-box {
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  padding: 80px;
+  margin-top: 40px;
+  margin-left: 220px;
+  margin-right: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.microsoft-logo {
+  width: 290px;
+  margin-bottom: 15px;
+}
+
+.sync-button {
+  background-color: #0078d4;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sync-text {
+  color: #fff;
+}
+
+.sync-button:hover {
+  background-color: #005a9e;
+}
+
+.search-container {
+  margin-top: 40px;
+}
+
+label {
+  display: block;
+  margin-top: 20px;
+}
+
+input {
+  margin-top: 5px;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+button {
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.sync-box {
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+  backdrop-filter: blur(10px); /* Blurs anything behind the box */
+  border-radius: 10px;
+  padding: 40px;
+  margin-top: 40px;
+  margin-left: 20%;
+  margin-right: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.sync-box.synced .microsoft-logo {
+  width: 200px;
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
+
+.search-button {
+  background-color: #005a9e;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 24px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 30px;
+}
+
+.search-button:hover {
+  background-color: #FA4616;
+}
+
+.sync-box.synced label {
+  display: block;
+  margin-top: 0px;
+  color: #333;
+  font-size: 18px;
+  text-align: left;
+}
+
+
+.date-range {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 500px;
+  margin-top: 20px;
+}
+
+.date-input {
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+}
+
+.date-input label {
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.date-input input {
+  margin-top: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+body {
+  background-color: #f0f0f0;
+}
+
+.flights-container {
+  display: flex;
+  height: 80vh;
+  padding: 35px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+
+.dates-container {
+  flex: 1;
+  flex-basis: 20%; 
+  flex-grow: 0;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-right: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dates-container h2 {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #FA4616;
+}
+
+.date-boxes {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.no-dates-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+}
+
+.no-dates-message img {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.no-dates-message p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.no-dates-message a {
+  color: #FA4616;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.no-dates-message a:hover {
+  text-decoration: underline;
+}
+
+.date-card {
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.date-card.selected {
+  background-color: #0021A5;
+  color: #fff;
+}
+
+.date-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.date-section:last-child {
+  margin-bottom: 0;
+}
+
+.date-icon {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.date-label {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.date-value {
+  margin-left: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #ccc;
+}
+
+
+.search-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 30px;
+  box-shadow: 0 12px 4px rgba(250, 70, 22, 0.2);
+}
+
+.search-bar select,
+.search-bar input,
+.search-bar button {
+  margin: 0 10px;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #cccccc;
+  flex: 1;
+  box-sizing: border-box;
+}
+
+.search-bar select {
+  flex: 1;
+}
+
+.search-bar input {
+  flex: 2;
+}
+
+.search-bar button {
+  flex: 1;
+  background-color: #0021A5;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.search-bar select:first-child,
+.search-bar button:last-child {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+
+.dates-container, .search-container {
+  margin-top: 0; 
+  padding-top: 0; 
+}
+
+
+
+.flight-results {
+  flex: 1;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+
+}
+
+.flight-results table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0;
+}
+
+.flight-results th {
+  background-color: #0021A5;
+  color: white;
+  font-weight: bold;
+  padding: 12px;
+  text-align: left;
+}
+
+.flight-results td {
+  padding: 12px;
+  border-bottom: 1px solid #FA4616;
+}
+.no-results-message,
+.loading-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+}
+
+.no-results-message img,
+.loading-message img {
+  width: 330px;
+  margin-bottom: 20px;
+}
+
+.no-results-message p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #0021A5;
+  font-weight: bold;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spinning {
+  animation: spin 2s linear infinite;
 }
