@@ -11,7 +11,7 @@ import PrivateRoutes from './components/PrivateRoutes';
 import axios from 'axios';
 import { Toaster } from 'react-hot-toast';
 import { UserContextProvider } from '../context/userContext';
-import NavBar from './components/NavBar.jsx';
+import NavBar from './components/Navbar.jsx';
 
 axios.defaults.baseURL = 'https://gatorfly.onrender.com';
 axios.defaults.withCredentials = true;
