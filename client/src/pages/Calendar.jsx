@@ -21,48 +21,61 @@ export default function Calendar() {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
 
-  useEffect(() => {
-    const queryParams = new URLSearchParams(window.location.search);
-    const login = queryParams.get('login');
-    if (login === 'success') {
-      setLoginSuccess(true);
+ useEffect(() => {
+  const queryParams = new URLSearchParams(window.location.search);
+  const token = queryParams.get('token');
+  const login = queryParams.get('login');
+
+  if (login === 'success') {
+    if (token) {
+      localStorage.setItem('microsoftToken', token);
+      // Optionally clear the URL to enhance security and avoid exposing the token in the browser history
+      window.history.replaceState({}, document.title, window.location.pathname);
     }
-  }, []);
+    setLoginSuccess(true);
+  }
+}, []);
+
 
   const handleLogin = () => {
     window.location.href = loginUrl;
   };
 
   const handleSearch = async () => {
-    if (!startDate || !endDate) {
-      toast.error('Please select both start and end dates before searching.');
-      return;
-    }
-  
-    const currentDate = new Date().toISOString().slice(0, 10);
-    if (startDate < currentDate || endDate < currentDate) {
-      toast.error('Please select a date range in the future.');
-      return;
-    }
-  
-    if (startDate > endDate) {
-      toast.error('Start date must be earlier than end date.');
-      return;
-    }
-  
-    try {
-      const response = await fetch(`http://localhost:8000/getDates?startDateTime=${startDate}T00:00:00.000Z&endDateTime=${endDate}T23:59:59.999Z`, {
-        credentials: 'include',
-      });
-  
-      const data = await response.json();
-      setFreeDateRanges(data.freeDateRanges);
-      navigate('/flights', { state: { startDate, endDate, freeDateRanges: data.freeDateRanges } });
-    } catch (error) {
-      console.error('Error fetching free date ranges:', error);
-      navigate('/flights', { state: { startDate, endDate, freeDateRanges: [] } });
-    }
-  };
+  if (!startDate || !endDate) {
+    toast.error('Please select both start and end dates before searching.');
+    return;
+  }
+
+  const currentDate = new Date().toISOString().slice(0, 10);
+  if (startDate < currentDate || endDate < currentDate) {
+    toast.error('Please select a date range in the future.');
+    return;
+  }
+
+  if (startDate > endDate) {
+    toast.error('Start date must be earlier than end date.');
+    return;
+  }
+
+  const token = localStorage.getItem('microsoftToken');
+  try {
+    const response = await fetch(`http://localhost:8000/getDates?startDateTime=${startDate}T00:00:00.000Z&endDateTime=${endDate}T23:59:59.999Z`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      }
+    });
+
+    const data = await response.json();
+    setFreeDateRanges(data.freeDateRanges);
+    navigate('/flights', { state: { startDate, endDate, freeDateRanges: data.freeDateRanges } });
+  } catch (error) {
+    console.error('Error fetching free date ranges:', error);
+    toast.error('Failed to fetch date ranges. Please try again.');
+    navigate('/flights', { state: { startDate, endDate, freeDateRanges: [] } });
+  }
+};
+
 
   return (
     <div className="calendar-container" style={{ backgroundImage: `url(${wingImage})` }}>
