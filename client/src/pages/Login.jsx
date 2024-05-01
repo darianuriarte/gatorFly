@@ -16,12 +16,13 @@ export default function Login() {
 
     try {
       const response = await axios.post('/login', { email, password });
-      const responseData = response.data;
+      const { user, token, error } = response.data;
 
-      if (responseData.error) {
-        toast.error(responseData.error);
+      if (error) {
+        toast.error(error);
       } else {
-        setUser(responseData); // Update the user state in the context
+        localStorage.setItem('token', token); // Save token to local storage
+        setUser(user); // Update the user state in the context
         setData({ email: '', password: '' }); // Reset form fields
         toast.success('Logged in successfully'); // Success message
         navigate('/calendar'); // Navigate to dashboard or home page
