@@ -46,54 +46,54 @@ const registerUser = async (req, res) => {
     }
 }
 
-//Login Endpoint
 const loginUser = async (req, res) => {
     try {
-        const {email, password} = req.body;
-
-        //Check if user exists
-        const user = await User.findOne({email});
-        if (!user){
+        const { email, password } = req.body;
+        
+        // Check if user exists
+        const user = await User.findOne({ email });
+        if (!user) {
             return res.json({
                 error: 'User not found'
-            })
+            });
         }
 
-        //Check if passwords match
-        const match = await comparePassword(password, user.password)
-        if (match){
-            jwt.sign({email: user.email, id: user._id, name: user.name}, process.env.JWT_SECRET, {}, (err, token) => {
-                if (err) {
-                    console.error(err);
-                    return res.status(500).json({ error: "An error occurred during the login process." });
-                }
-                res.cookie('token', token).json(user)
-            })
-
-        }
-        if(!match){
-            res.json({
+        // Check if passwords match
+        const match = await comparePassword(password, user.password);
+        if (match) {
+            const token = jwt.sign(
+                { email: user.email, id: user._id, name: user.name },
+                process.env.JWT_SECRET
+            );
+            // Return the token directly in response instead of setting a cookie
+            return res.json({ token, user });
+        } else {
+            return res.json({
                 error: 'Passwords do not match'
-            })
+            });
         }
     } catch (error) {
-        console.log(error)
+        console.log(error);
+        res.status(500).json({ error: 'An error occurred during the login process.' });
     }
-}
+};
 
-const getProfile =(req, res) =>{
-    const {token} = req.cookies
-    if (token){
-        jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) =>{
-            if (err) throw err;
-            res.json(user)
-        } )
+
+const getProfile = (req, res) => {
+    // Assuming the token is sent in the Authorization header
+    const token = req.headers.authorization?.split(" ")[1]; // Bearer Token
+    if (token) {
+        jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+            if (err) {
+                return res.status(401).json({ error: "Failed to authenticate token." });
+            }
+            res.json(decoded);
+        });
     } else {
-        res.json(null)
+        res.status(401).json({ error: "No token provided." });
     }
+};
 
-   
-}
 
 const logoutUser = (req, res) => {
     res.clearCookie('token'); // Clear the JWT token stored in the cookie
