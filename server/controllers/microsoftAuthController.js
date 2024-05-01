@@ -26,11 +26,11 @@ const handleMicrosoftCallback = async (req, res) => {
     res.cookie('microsoftToken', tokenResponse.data.access_token, { httpOnly: true,  path: '/' });
 
     // Redirect to your frontend application with a success flag or similar
-    res.redirect('http://localhost:5173/calendar?login=success');
+    res.redirect('https://gatorfly-frontend.onrender.com/calendar?login=success');
   } catch (error) {
     console.error('Error during Microsoft auth callback:', error.response ? error.response.data : error.message);
     // Redirect with an error query parameter
-    res.redirect(`http://localhost:5173/calendar?error=Error during Microsoft authentication`);
+    res.redirect(`https://gatorfly-frontend.onrender.com/calendar?error=Error during Microsoft authentication`);
   }
 };
 
