@@ -5,7 +5,7 @@ const handleMicrosoftCallback = async (req, res) => {
   const { code } = req.query;
   if (!code) {
     // Redirect with an error query parameter
-    return res.redirect('http://localhost:5173/calendar?error=Authorization code is required.');
+    return res.redirect('https://gatorfly-frontend.onrender.com/calendar?error=Authorization code is required.');
   }
 
   try {
