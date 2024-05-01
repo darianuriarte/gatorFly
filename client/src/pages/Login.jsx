@@ -11,26 +11,25 @@ export default function Login() {
   const { setUser } = useContext(UserContext);
 
   const loginUser = async (event) => {
-    event.preventDefault();
-    const { email, password } = data;
-
-    try {
-      const response = await axios.post('/login', { email, password });
-      const responseData = response.data;
-
-      if (responseData.error) {
-        toast.error(responseData.error);
-      } else {
-        setUser(responseData); // Update the user state in the context
-        setData({ email: '', password: '' }); // Reset form fields
-        toast.success('Logged in successfully'); // Success message
-        navigate('/calendar'); // Navigate to dashboard or home page
-      }
-    } catch (error) {
-      console.error('Login error:', error);
-      toast.error('Login failed. Please try again.');
+  event.preventDefault();
+  const { email, password } = data;
+  try {
+    const response = await axios.post('/login', { email, password });
+    const responseData = response.data;
+    if (responseData.error) {
+      toast.error(responseData.error);
+    } else {
+      localStorage.setItem('token', responseData.token); // Store the token in local storage
+      setUser(responseData.user); // Update the user state in the context
+      setData({ email: '', password: '' }); // Reset form fields
+      toast.success('Logged in successfully'); // Success message
+      navigate('/calendar'); // Navigate to dashboard or home page
     }
-  };
+  } catch (error) {
+    console.error('Login error:', error);
+    toast.error('Login failed. Please try again.');
+  }
+};
 
   return (
     <div className="login-page">
