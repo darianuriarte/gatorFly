@@ -7,7 +7,7 @@ const {test, registerUser, loginUser, getProfile, logoutUser} = require('../cont
 router.use(
     cors({
         credentials: true,
-        origin: 'http://localhost:5173'
+        origin: 'https://gatorfly-frontend.onrender.com'
     })
 )
 
