@@ -4,7 +4,6 @@ require('dotenv').config();
 const handleMicrosoftCallback = async (req, res) => {
   const { code } = req.query;
   if (!code) {
-    // Redirect with an error query parameter
     return res.redirect('https://gatorfly-frontend.onrender.com/calendar?error=Authorization code is required.');
   }
 
@@ -22,14 +21,11 @@ const handleMicrosoftCallback = async (req, res) => {
       },
     });
 
-    // Set the JWT as a cookie
-    res.cookie('microsoftToken', tokenResponse.data.access_token, { httpOnly: true,  path: '/' });
-
-    // Redirect to your frontend application with a success flag or similar
-    res.redirect('https://gatorfly-frontend.onrender.com/calendar?login=success');
+    // Passing the token in the URL (careful with security implications)
+    const token = encodeURIComponent(tokenResponse.data.access_token);
+    res.redirect(`https://gatorfly-frontend.onrender.com/calendar?login=success&token=${token}`);
   } catch (error) {
     console.error('Error during Microsoft auth callback:', error.response ? error.response.data : error.message);
-    // Redirect with an error query parameter
     res.redirect(`https://gatorfly-frontend.onrender.com/calendar?error=Error during Microsoft authentication`);
   }
 };
