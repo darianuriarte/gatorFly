@@ -2,7 +2,6 @@ const express = require ('express');
 const dotenv = require ('dotenv').config()
 const cors = require('cors')
 const {mongoose} = require ('mongoose')
-const cookieParser = require('cookie-parser')
 const microsoftAuthRoutes = require('./routes/microsoftAuthRoutes');
 const calendarRoutes = require('./routes/calendarRoutes');
 const flightsRoutes = require('./routes/flightsRoutes');
@@ -27,7 +26,6 @@ mongoose.connect(process.env.MONGO_URL)
 
 //Middleware
 app.use(express.json());
-app.use(cookieParser());
 app.use(express.urlencoded({extended: false}))
 // Use the Microsoft auth routes
 app.use(microsoftAuthRoutes);
