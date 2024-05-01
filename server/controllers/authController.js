@@ -93,9 +93,8 @@ const getProfile = (req, res) => {
 };
 
 const logoutUser = (req, res) => {
-    res.clearCookie('token'); // Clear the JWT token stored in the cookie
-    res.json({ message: "Logged out successfully" }); // Send a success message
-}
+  res.json({ message: "Logged out successfully" });
+};
 
 
 module.exports = {
