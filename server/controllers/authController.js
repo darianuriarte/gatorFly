@@ -48,38 +48,36 @@ const registerUser = async (req, res) => {
 
 //Login Endpoint
 const loginUser = async (req, res) => {
-    try {
-        const {email, password} = req.body;
+  try {
+    const { email, password } = req.body;
 
-        //Check if user exists
-        const user = await User.findOne({email});
-        if (!user){
-            return res.json({
-                error: 'User not found'
-            })
-        }
-
-        //Check if passwords match
-        const match = await comparePassword(password, user.password)
-        if (match){
-            jwt.sign({email: user.email, id: user._id, name: user.name}, process.env.JWT_SECRET, {}, (err, token) => {
-                if (err) {
-                    console.error(err);
-                    return res.status(500).json({ error: "An error occurred during the login process." });
-                }
-                res.cookie('token', token).json(user)
-            })
-
-        }
-        if(!match){
-            res.json({
-                error: 'Passwords do not match'
-            })
-        }
-    } catch (error) {
-        console.log(error)
+    // Check if user exists
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.json({
+        error: 'User not found',
+      });
     }
-}
+
+    // Check if passwords match
+    const match = await comparePassword(password, user.password);
+    if (match) {
+      const token = jwt.sign(
+        { email: user.email, id: user._id, name: user.name },
+        process.env.JWT_SECRET,
+        {}
+      );
+
+      res.json({ token, user });
+    } else {
+      res.json({
+        error: 'Passwords do not match',
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const getProfile =(req, res) =>{
     const {token} = req.cookies
