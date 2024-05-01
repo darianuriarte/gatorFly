@@ -12,7 +12,7 @@ const app = express();
 
 // Place this near the top of your app.js or server.js, right after initializing your Express app
 const corsOptions = {
-    origin: 'https://gatorfly-frontend.onrender.com', // Allow only your React app to communicate with this backend
+    origin: 'https://gator-fly.com', // Allow only your React app to communicate with this backend
     credentials: true, // Allow cookies to be sent
     methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'],
   };
