@@ -13,7 +13,7 @@ import { Toaster } from 'react-hot-toast';
 import { UserContextProvider } from '../context/userContext';
 import NavBar from './components/Navbar.jsx';
 
-axios.defaults.baseURL = 'https://gatorfly.onrender.com';
+axios.defaults.baseURL = 'www.api.gator-fly.com';
 axios.defaults.withCredentials = true;
 
 function App() {
