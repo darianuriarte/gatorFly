@@ -1,16 +1,22 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
-import { UserContext } from '../../context/userContext';
+import { Link, useNavigate} from 'react-router-dom';
+import axios from 'axios';
 
 export default function NavBar() {
-  const navigate = useNavigate();
-  const { setUser } = useContext(UserContext);
 
-  const handleLogout = () => {
-    localStorage.removeItem('token'); // Remove the token from local storage
-    setUser(null); // Reset the user state in the context
-    navigate('/'); // Redirect to the home page
-  };
+
+
+    const navigate = useNavigate(); // Use useNavigate hook for redirection
+
+    const handleLogout = async () => {
+        try {
+            const response = await axios.get('/logout');
+            console.log(response.data.message); // Log the logout success message
+            navigate('/'); // Redirect to the home page
+        } catch (error) {
+            console.error('Logout failed', error);
+        }
+    };
+
 
   const navStyle = {
     display: 'flex',
@@ -58,15 +64,16 @@ export default function NavBar() {
 
   return (
     <nav style={navStyle}>
-      <div style={logoContainerStyle}>
-        <span style={logoTextStyle}>GatorFly</span>
-      </div>
-      <div style={{ display: 'flex', flexGrow: 1, justifyContent: 'flex-end', alignItems: 'center', height: '100%' }}>
-        <Link to='/calendar?login=success' style={linkStyle}>
-          {calendarIcon}
-        </Link>
-        <div onClick={handleLogout} style={{...linkStyle, cursor: 'pointer'}}>Log Out</div>
-      </div>
+        <div style={logoContainerStyle}>
+            <span style={logoTextStyle}>GatorFly</span>
+        </div>
+        <div style={{ display: 'flex', flexGrow: 1, justifyContent: 'flex-end', alignItems: 'center', height: '100%' }}>
+            <Link to='/calendar?login=success' style={linkStyle}>
+                {calendarIcon}
+            </Link>
+            {/* Update the Log Out link to call handleLogout on click */}
+            <div onClick={handleLogout} style={{...linkStyle, cursor: 'pointer'}}>Log Out</div> 
+        </div>
     </nav>
-  );
+);
 }
