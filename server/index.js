@@ -14,7 +14,7 @@ const app = express();
 const corsOptions = {
     origin: 'https://gatorfly-frontend.onrender.com', // Allow only your React app to communicate with this backend
     credentials: true, // Allow cookies to be sent
-    methods: ['GET', 'POST', 'OPTIONS'], // Adjust according to your needs
+    methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'],
   };
   
 app.use(cors(corsOptions));
