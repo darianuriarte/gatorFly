@@ -18,7 +18,7 @@ export default function Flights() {
   useEffect(() => {
     const fetchFreeDateRanges = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/freeDateRanges', { withCredentials: true });
+        const response = await axios.get('https://gatorfly.onrender.com', { withCredentials: true });
         setFreeDateRanges(response.data.freeDateRanges);
       } catch (error) {
         console.error('Error fetching free date ranges:', error);
@@ -61,7 +61,7 @@ export default function Flights() {
 
     try {
       const endpoint = flightType === 'one-way' ? 'searchOneWayFlights' : 'searchRoundTripFlights';
-      const response = await axios.get(`http://localhost:8000/${endpoint}`, {
+      const response = await axios.get(`https://gatorfly.onrender.com/${endpoint}`, {
         params: searchParams,
         withCredentials: true,
       });
