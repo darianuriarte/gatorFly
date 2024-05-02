@@ -14,11 +14,13 @@ export default function Flights() {
   const [selectedDateRangeIndex, setSelectedDateRangeIndex] = useState(null);
   const [flights, setFlights] = useState([]);
   const [searchClicked, setSearchClicked] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);  // Add a loading state
 
   const userToken = localStorage.getItem('token');
 
   useEffect(() => {
     const fetchFreeDateRanges = async () => {
+      setIsLoading(true);  // Set loading to true when starting to fetch
       try {
         const response = await axios.get('https://gatorfly.onrender.com/freeDateRanges', {
           headers: {
@@ -29,10 +31,15 @@ export default function Flights() {
       } catch (error) {
         console.error('Error fetching free date ranges:', error);
       }
+      setIsLoading(false);  // Set loading to false after fetch is complete
     };
 
     fetchFreeDateRanges();
   }, [userToken]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;  // Show loading or a default message while data is fetching
+  }
 
   const handleSearch = async () => {
     if (selectedDateRangeIndex === null) {
