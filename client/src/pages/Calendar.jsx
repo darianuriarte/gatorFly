@@ -59,6 +59,7 @@ export default function Calendar() {
   }
 
   const token = localStorage.getItem('microsoftToken');
+  const userToken = localStorage.getItem('token');
   try {
     const response = await fetch(`https://gatorfly.onrender.com/getDates?startDateTime=${startDate}T00:00:00.000Z&endDateTime=${endDate}T23:59:59.999Z`, {
       headers: {
