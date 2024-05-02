@@ -3,14 +3,16 @@ const jwt = require('jsonwebtoken');
 const FreeDateRange = require('../models/FreeDateRange');
 
 const getUserFreeDateRanges = async (req, res) => {
-    const userToken = req.cookies['token'];
+    // Extracting token from the Authorization header
+    const authHeader = req.headers.authorization;
+    const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
 
-    if (!userToken) {
+    if (!token) {
         return res.status(401).json({ error: 'No user authentication token found' });
     }
 
     try {
-        const decoded = jwt.verify(userToken, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
         // Find the user's free date ranges from the database
         const freeDateRangeDoc = await FreeDateRange.findOne({ userId: decoded.id });
