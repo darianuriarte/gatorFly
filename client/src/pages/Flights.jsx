@@ -85,7 +85,7 @@ export default function Flights() {
     <div className="flights-container">
       <div className="dates-container">
         <h2>Available Dates:</h2>
-        {freeDateRanges.length > 0 ? (
+        {freeDateRanges && freeDateRanges.length > 0 ? (
           <div className="date-boxes">
             {freeDateRanges.map((range, index) => (
               <div
@@ -136,79 +136,79 @@ export default function Flights() {
         </div>
 
         <div className="flight-results">
-          {searchClicked && flights.length === 0 && (
+          {searchClicked && flights && flights.length === 0 && (
             <div className="loading-message">
               <img src={vacationImage} alt="Vacation Gator" className="spinning" />
             </div>
           )}
-          {flights.length > 0 && (
+          {flights && flights.length > 0 && (
             <div>
-            <table>
-              <thead>
-                <tr>
-                  <th>Price</th>
-                  <th>Origin</th>
-                  <th>Destination</th>
-                  <th>Departure</th>
-                  <th>Arrival</th>
-                  <th>Duration</th>
-                  <th>Carrier</th>
-                </tr>
-              </thead>
-              <tbody>
-                {flights.map((flight, index) => (
-                  <React.Fragment key={index}>
-                    {flightType === 'one-way' ? (
-                      <tr>
-                        <td>{flight.price}</td>
-                        <td>{flight.origin}</td>
-                        <td>{flight.destination}</td>
-                        <td>{new Date(flight.departure).toLocaleString()}</td>
-                        <td>{new Date(flight.arrival).toLocaleString()}</td>
-                        <td>{calculateDuration(flight.departure, flight.arrival)}</td>
-                        <td>{flight.carrier}</td>
-                      </tr>
-                    ) : flight.outbound && flight.inbound ? (
-                      <>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Price</th>
+                    <th>Origin</th>
+                    <th>Destination</th>
+                    <th>Departure</th>
+                    <th>Arrival</th>
+                    <th>Duration</th>
+                    <th>Carrier</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {flights.map((flight, index) => (
+                    <React.Fragment key={index}>
+                      {flightType === 'one-way' ? (
                         <tr>
-                          <td rowSpan={2}>{flight.price}</td>
-                          <td>{flight.outbound.origin}</td>
-                          <td>{flight.outbound.destination}</td>
-                          <td>{new Date(flight.outbound.departure).toLocaleString()}</td>
-                          <td>{new Date(flight.outbound.arrival).toLocaleString()}</td>
-                          <td>{calculateDuration(flight.outbound.departure, flight.outbound.arrival)}</td>
-                          <td>{flight.outbound.carrier}</td>
+                          <td>{flight.price}</td>
+                          <td>{flight.origin}</td>
+                          <td>{flight.destination}</td>
+                          <td>{new Date(flight.departure).toLocaleString()}</td>
+                          <td>{new Date(flight.arrival).toLocaleString()}</td>
+                          <td>{calculateDuration(flight.departure, flight.arrival)}</td>
+                          <td>{flight.carrier}</td>
                         </tr>
-                        <tr>
-                          <td>{flight.inbound.origin}</td>
-                          <td>{flight.inbound.destination}</td>
-                          <td>{new Date(flight.inbound.departure).toLocaleString()}</td>
-                          <td>{new Date(flight.inbound.arrival).toLocaleString()}</td>
-                          <td>{calculateDuration(flight.inbound.departure, flight.inbound.arrival)}</td>
-                          <td>{flight.inbound.carrier}</td>
-                        </tr>
-                      </>
-                    ) : null}
-                  </React.Fragment>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                      ) : flight.outbound && flight.inbound ? (
+                        <>
+                          <tr>
+                            <td rowSpan={2}>{flight.price}</td>
+                            <td>{flight.outbound.origin}</td>
+                            <td>{flight.outbound.destination}</td>
+                            <td>{new Date(flight.outbound.departure).toLocaleString()}</td>
+                            <td>{new Date(flight.outbound.arrival).toLocaleString()}</td>
+                            <td>{calculateDuration(flight.outbound.departure, flight.outbound.arrival)}</td>
+                            <td>{flight.outbound.carrier}</td>
+                          </tr>
+                          <tr>
+                            <td>{flight.inbound.origin}</td>
+                            <td>{flight.inbound.destination}</td>
+                            <td>{new Date(flight.inbound.departure).toLocaleString()}</td>
+                            <td>{new Date(flight.inbound.arrival).toLocaleString()}</td>
+                            <td>{calculateDuration(flight.inbound.departure, flight.inbound.arrival)}</td>
+                            <td>{flight.inbound.carrier}</td>
+                          </tr>
+                        </>
+                      ) : null}
+                    </React.Fragment>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
           {!searchClicked && (
-  <div className="no-results-message">
-    {freeDateRanges.length === 0 ? (
-      <>
-        <img src={sadGator} alt="Sad Gator" />
-      </>
-    ) : (
-      <>
-        <img src={vacationImage} alt="Vacation Gator" />
-        <p>Please select a date range to start.</p>
-      </>
-    )}
-  </div>
-)}
+            <div className="no-results-message">
+              {freeDateRanges && freeDateRanges.length === 0 ? (
+                <>
+                  <img src={sadGator} alt="Sad Gator" />
+                </>
+              ) : (
+                <>
+                  <img src={vacationImage} alt="Vacation Gator" />
+                  <p>Please select a date range to start.</p>
+                </>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
