@@ -104,12 +104,12 @@ export default function Flights() {
                 <div className="date-section">
                   <FaPlane className="date-icon" />
                   <span className="date-label">Departure:</span>
-                  <span className="date-value">{new Date(range.startDate).toLocaleDateString()}</span>
+                  <span className="date-value">{new Date(range.startDate).toLocaleDateString('en-US', { timeZone: 'EDT' })}</span>
                 </div>
                 <div className="date-section">
                   <FaHome className="date-icon" />
                   <span className="date-label">Return:</span>
-                  <span className="date-value">{new Date(range.endDate).toLocaleDateString()}</span>
+                  <span className="date-value">{new Date(range.endDate).toLocaleDateString('en-US', { timeZone: 'EDT' })}</span>
                 </div>
               </div>
             ))}
