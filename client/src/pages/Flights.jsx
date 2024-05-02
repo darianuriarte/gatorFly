@@ -111,7 +111,7 @@ export default function Flights() {
                 <div className="date-section">
                   <FaPlane className="date-icon" />
                   <span className="date-label">Departure:</span>
-                 <span className="date-value">{new Date(range.startDate).toLocaleDateString()}</span>
+                 <span className="date-value">{new Date(range.startDate + 'T00:00:00Z').toLocaleDateString()}</span>
                 </div>
                 <div className="date-section">
                   <FaHome className="date-icon" />
