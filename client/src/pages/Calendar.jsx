@@ -63,6 +63,7 @@ export default function Calendar() {
     const response = await fetch(`https://gatorfly.onrender.com/getDates?startDateTime=${startDate}T00:00:00.000Z&endDateTime=${endDate}T23:59:59.999Z`, {
       headers: {
         'Authorization': `Bearer ${token}`,
+        'x-user-token': userToken 
       }
     });
 
