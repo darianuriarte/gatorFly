@@ -18,7 +18,7 @@ export default function Flights() {
   useEffect(() => {
     const fetchFreeDateRanges = async () => {
       try {
-        const response = await axios.get('https://gatorfly.onrender.com', { withCredentials: true });
+        const response = await axios.get('https://gatorfly.onrender.com/freeDateRanges', { withCredentials: true });
         setFreeDateRanges(response.data.freeDateRanges);
       } catch (error) {
         console.error('Error fetching free date ranges:', error);
