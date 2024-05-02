@@ -15,10 +15,16 @@ export default function Flights() {
   const [flights, setFlights] = useState([]);
   const [searchClicked, setSearchClicked] = useState(false);
 
+  const userToken = localStorage.getItem('token');
+
   useEffect(() => {
     const fetchFreeDateRanges = async () => {
       try {
-        const response = await axios.get('https://gatorfly.onrender.com/freeDateRanges', { withCredentials: true });
+        const response = await axios.get('https://gatorfly.onrender.com/freeDateRanges', {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        });
         setFreeDateRanges(response.data.freeDateRanges);
       } catch (error) {
         console.error('Error fetching free date ranges:', error);
@@ -26,7 +32,7 @@ export default function Flights() {
     };
 
     fetchFreeDateRanges();
-  }, []);
+  }, [userToken]);
 
   const handleSearch = async () => {
     if (selectedDateRangeIndex === null) {
@@ -63,7 +69,9 @@ export default function Flights() {
       const endpoint = flightType === 'one-way' ? 'searchOneWayFlights' : 'searchRoundTripFlights';
       const response = await axios.get(`https://gatorfly.onrender.com/${endpoint}`, {
         params: searchParams,
-        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
       });
       setFlights(response.data);
     } catch (error) {
