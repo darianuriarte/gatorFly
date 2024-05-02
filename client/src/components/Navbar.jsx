@@ -11,6 +11,8 @@ export default function NavBar() {
         try {
             const response = await axios.get('/logout');
             console.log(response.data.message); // Log the logout success message
+            localStorage.removeItem("token");
+            localStorage.removeItem("microsoftToken");
             navigate('/'); // Redirect to the home page
         } catch (error) {
             console.error('Logout failed', error);
