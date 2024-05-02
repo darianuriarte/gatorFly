@@ -26,7 +26,7 @@ export function UserContextProvider({ children }) {
 
   return (
     <UserContext.Provider value={{ user, setUser, loading }}>
-      {loading ? <div>Loading...</div> : children} // Display loading indicator or children based on the loading state
+      {loading ? <div>Loading...</div> : children} 
     </UserContext.Provider>
   );
 }
