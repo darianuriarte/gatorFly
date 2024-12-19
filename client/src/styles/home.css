@@ -1,0 +1,115 @@
+.home-container {
+    margin: 0;
+    padding: 2%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url('../planepic.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    color: white;
+}
+
+.home-heading {
+    font-family: 'Judson, serif';
+    font-size: 4vw;
+    color: black;
+    opacity: 100%;
+    position: absolute;
+    top: 7%;
+    left: 5%;
+}
+
+.home-p {
+    font-family: 'Inter, sans-serif';
+    font-size: 1.2vw;
+    color: black;
+    opacity: 100%;
+    position: relative;
+
+    top: 50%;
+}
+
+.microsoft {
+    position: absolute;
+    background-color: white;
+    opacity: 0.5;
+    height: 45%;
+    width: 42%;
+    top: 35%;
+    left: 27%;
+    border-radius: 10px;
+}
+
+.button-h {
+    position: absolute;
+    top: 70%;
+    left: 38%;
+}
+
+.image-h {
+    position: absolute;
+    top: 42%;
+    left: 37%;
+    width: 23%;
+    height: auto;
+}
+
+.searchWelcome {
+    position:absolute;
+    top: 10%;
+    left: 10%;
+}
+
+.searchBox {
+    position: absolute;
+    background-color: rgba(255,255,255,0.5);
+    height: 25%;
+    width: 55%;
+    top: 40%;
+    left: 20%;
+    border-radius: 10px;
+}
+
+.searchParams {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 20%;
+}
+
+.searchDestinations {
+    display: flex;
+    justify-content: space-evenly;
+    height: 50px;
+}
+
+.destinationBoxes {
+    background-color: white;
+    opacity: 1;
+    padding: 20px;
+}
+
+.searchDates {
+    display: flex;
+    justify-content: center;
+    height: 50px;
+}
+
+.searchButton {
+    position: relative;
+    top: 40%;
+}
+
+.searchLabel {
+    position: absolute;
+    
+    padding: 0.5px;
+    color: black;
+}
